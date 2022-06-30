@@ -12,6 +12,7 @@ class OnBoarding extends StatefulWidget {
 }
 
 class _OnBoardingState extends State<OnBoarding> {
+  final PageController _pageController = PageController();
   @override
   Widget build(BuildContext context) {
     final onBoarding = Provider.of<OnBoardingProvider>(context);
@@ -21,6 +22,8 @@ class _OnBoardingState extends State<OnBoarding> {
           Expanded(
             child: PageView.builder(
               itemCount: 3,
+              controller: _pageController,
+              physics: BouncingScrollPhysics(),
               itemBuilder: (context, index) {
                 return OnBoardingWidget();
               },
@@ -35,7 +38,7 @@ class _OnBoardingState extends State<OnBoarding> {
                 TextButton(
                     onPressed: (){
                       if(onBoarding.selectedIndex!=0){
-                        onBoarding.setSelectIndex(onBoarding.selectedIndex-1);
+                        _pageController.previousPage(duration: Duration(milliseconds: 500), curve: Curves.easeIn);
                       }
                     },
                     child: Text(
@@ -49,7 +52,7 @@ class _OnBoardingState extends State<OnBoarding> {
                 ElevatedButton(
                     onPressed: (){
                       if(onBoarding.selectedIndex!=2){
-                        onBoarding.setSelectIndex(onBoarding.selectedIndex+1);
+                        _pageController.nextPage(duration: Duration(milliseconds: 500), curve: Curves.easeIn);
                       }
                     },
                     style: ButtonStyle(
