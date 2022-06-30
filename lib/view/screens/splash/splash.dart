@@ -11,12 +11,20 @@ class Splash extends StatefulWidget {
 }
 
 class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
+  double _logoHeight = 188;
+  double _logoWidth = 268;
+  double _splashOpacity = 1;
+
   @override
   void initState() {
     super.initState();
-    Timer(
-        Duration(seconds: 3),
-        () => Navigator.pushReplacementNamed(context, '/onboarding'));
+    Future.delayed(Duration(seconds: 0)).then((value) =>  setState((){
+      // _logoHeight = _logoHeight*20;
+      // _logoWidth = _logoWidth*20;
+      _splashOpacity = 0;
+    }));
+    Future.delayed(Duration(milliseconds: 2700)).then((value) =>  Navigator.pushReplacementNamed(context, '/onboarding'));
+
   }
 
   @override
@@ -26,19 +34,25 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          AnimatedContainer(
-            duration: Duration(seconds: 3),
-            child: Image.asset('assets/images/logo.png'),
-            curve: Curves.easeInOutCubicEmphasized,
+          AnimatedOpacity(
+            opacity: _splashOpacity,
+            duration: Duration(milliseconds: 2000),
+            child: Container(
+              // height: _logoHeight,
+              // width: _logoWidth,
+              child: Image.asset('assets/images/logo.png'),
+            ),
           ),
           SizedBox(
             height: 20,
           ),
-          AnimatedContainer(
-            width: 274,
-            duration: Duration(seconds: 3),
-            child: Image.asset('assets/images/localfilings.png'),
-            curve: Curves.easeInOutCubicEmphasized,
+          AnimatedOpacity(
+            opacity: _splashOpacity,
+            duration: Duration(milliseconds: 2000),
+            child: Container(
+              width: 274,
+              child: Image.asset('assets/images/localfilings.png'),
+            ),
           )
         ],
       ),
