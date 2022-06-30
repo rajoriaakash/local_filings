@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:local_filings/view/screens/home/home.dart';
 import 'package:local_filings/view/screens/onboarding/onboarding.dart';
-import 'package:local_filings/view/screens/onboarding/onboarding_widget.dart';
+import 'package:local_filings/view/screens/splash/splash.dart';
 import 'package:provider/provider.dart';
+
 import 'provider/onboarding_provider.dart';
 void main() {
   runApp(MultiProvider(providers: [
@@ -19,6 +21,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      initialRoute: '/',
+      routes: {
+        // When navigating to the "/" route, build the FirstScreen widget.
+        '/': (context) => const Splash(),
+        // When navigating to the "/second" route, build the SecondScreen widget.
+        '/onboarding': (context) => const OnBoarding(),
+        '/home': (context) => const Home()
+      },
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -31,7 +41,6 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(),
     );
   }
 }
@@ -63,6 +72,6 @@ class _MyHomePageState extends State<MyHomePage> {
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
-    return OnBoarding();
+    return Splash();
   }
 }
