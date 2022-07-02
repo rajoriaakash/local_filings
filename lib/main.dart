@@ -31,13 +31,13 @@ class MyApp extends StatelessWidget {
         // When navigating to the "/" route, build the FirstScreen widget.
         '/': (context) => const Splash(),
         // When navigating to the "/second" route, build the SecondScreen widget.
-        '/onboarding': (context) => const OnBoarding(),
-        '/home': (context) => const Home(),
-        '/register': (context) => const Register(),
-        'login': (context) => const Login(),
-        'forgot_password' : (context) => const ForgotPassword(),
-        'verify_phone' : (context) => const VerifyPhone(),
-        'reset_password' : (context) => const ResetPassword()
+        '/onboarding': (context) =>  OnBoarding(),
+        '/home': (context) =>  Home(),
+        '/register': (context) => Register(),
+        '/login': (context) =>  Login(),
+        '/forgot_password' : (context) =>  ForgotPassword(),
+        '/verify_phone' : (context) =>  VerifyPhone(),
+        '/reset_password' : (context) =>  ResetPassword()
 
       },
       theme: ThemeData(
