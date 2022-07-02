@@ -11,20 +11,19 @@ class Splash extends StatefulWidget {
 }
 
 class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
-  double _logoHeight = 188;
-  double _logoWidth = 268;
+  // double _logoHeight = 188;
+  // double _logoWidth = 268;
   double _splashOpacity = 1;
 
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration(seconds: 0)).then((value) =>  setState((){
+    Future.delayed(const Duration(seconds: 0)).then((value) =>  setState((){
       // _logoHeight = _logoHeight*20;
       // _logoWidth = _logoWidth*20;
       _splashOpacity = 0;
     }));
-    Future.delayed(Duration(milliseconds: 2700)).then((value) =>  Navigator.pushReplacementNamed(context, '/onboarding'));
-
+    Future.delayed(const Duration(milliseconds: 4800)).then((value) =>  Navigator.pushReplacementNamed(context, '/onboarding'));
   }
 
   @override
@@ -36,22 +35,24 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
         children: [
           AnimatedOpacity(
             opacity: _splashOpacity,
-            duration: Duration(milliseconds: 2000),
-            child: Container(
-              // height: _logoHeight,
-              // width: _logoWidth,
-              child: Image.asset('assets/images/logo.png'),
+            duration: const Duration(milliseconds: 4000),
+            curve: Curves.easeInQuint,
+            child: Image.asset(
+                'assets/images/logo.png',
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           AnimatedOpacity(
             opacity: _splashOpacity,
-            duration: Duration(milliseconds: 2000),
+            duration: const Duration(milliseconds: 4000),
+            curve: Curves.easeInQuint,
             child: Container(
               width: 274,
-              child: Image.asset('assets/images/localfilings.png'),
+              child: Image.asset(
+                  'assets/images/localfilings.png',
+              ),
             ),
           )
         ],

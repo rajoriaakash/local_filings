@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:local_filings/view/screens/auth/forgot_password.dart';
+import 'package:local_filings/view/screens/auth/login.dart';
+import 'package:local_filings/view/screens/auth/register.dart';
+import 'package:local_filings/view/screens/auth/reset.dart';
+import 'package:local_filings/view/screens/auth/verify_phone.dart';
 import 'package:local_filings/view/screens/home/home.dart';
 import 'package:local_filings/view/screens/onboarding/onboarding.dart';
 import 'package:local_filings/view/screens/splash/splash.dart';
@@ -9,7 +14,7 @@ void main() {
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider.value(value: OnBoardingProvider()),
   ],
-    child: MyApp(),
+    child: const MyApp(),
   ));
 }
 
@@ -27,7 +32,13 @@ class MyApp extends StatelessWidget {
         '/': (context) => const Splash(),
         // When navigating to the "/second" route, build the SecondScreen widget.
         '/onboarding': (context) => const OnBoarding(),
-        '/home': (context) => const Home()
+        '/home': (context) => const Home(),
+        '/register': (context) => const Register(),
+        'login': (context) => const Login(),
+        'forgot_password' : (context) => const ForgotPassword(),
+        'verify_phone' : (context) => const VerifyPhone(),
+        'reset_password' : (context) => const ResetPassword()
+
       },
       theme: ThemeData(
         // This is the theme of your application.
@@ -72,6 +83,6 @@ class _MyHomePageState extends State<MyHomePage> {
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
-    return Splash();
+    return const Splash();
   }
 }

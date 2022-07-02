@@ -27,12 +27,12 @@ class _OnBoardingState extends State<OnBoarding> {
               children: [
                  onBoarding.selectedIndex!=2? TextButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, '/home');
+                      Navigator.pushNamed(context, '/register');
                     },
-                    child: Text(
+                    child: const Text(
                       "Skip",
                       style: TextStyle(
-                          color: Color(0xFF888888),
+                          color: const Color(0xFFB5B5B5),
                           fontSize: 15
                       ),
                     )) : Container()
@@ -42,9 +42,9 @@ class _OnBoardingState extends State<OnBoarding> {
               child: PageView.builder(
                 itemCount: 3,
                 controller: _pageController,
-                physics: BouncingScrollPhysics(),
+                physics: const BouncingScrollPhysics(),
                 itemBuilder: (context, index) {
-                  return OnBoardingWidget();
+                  return const OnBoardingWidget();
                 },
                 onPageChanged: (index) => onBoarding.setSelectIndex(index),
               ),
@@ -58,11 +58,11 @@ class _OnBoardingState extends State<OnBoarding> {
                       onPressed: () {
                         if (onBoarding.selectedIndex != 0) {
                           _pageController.previousPage(
-                              duration: Duration(milliseconds: 500),
+                              duration: const Duration(milliseconds: 500),
                               curve: Curves.easeIn);
                         }
                       },
-                      child: Text(
+                      child: const Text(
                         "prev",
                         style: TextStyle(
                             fontSize: 18,
@@ -72,24 +72,24 @@ class _OnBoardingState extends State<OnBoarding> {
                   ),
                   ElevatedButton(
                       onPressed: () {
-                        if(onBoarding.selectedIndex==2)
-                          Navigator.pushNamed(context, '/home');
-                        else{
+                        if(onBoarding.selectedIndex==2) {
+                          Navigator.pushNamed(context, '/register');
+                        } else{
                           _pageController.nextPage(
-                              duration: Duration(milliseconds: 500),
+                              duration: const Duration(milliseconds: 500),
                               curve: Curves.easeIn);
                         }
                       },
                       style: ButtonStyle(
                           elevation: MaterialStateProperty.all(0),
-                          backgroundColor: MaterialStateProperty.all(Color(
+                          backgroundColor: MaterialStateProperty.all(const Color(
                               0xFFFF832A))
                       ),
-                      child: Text(
+                      child: const Text(
                         "Next",
                         style: TextStyle(
                             fontSize: 18,
-                            color: Color(0xFFFFFFFF)
+                            color: const Color(0xFFFFFFFF)
                         ),
                       )
                   ),

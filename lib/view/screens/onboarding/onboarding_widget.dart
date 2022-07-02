@@ -19,7 +19,7 @@ class OnBoardingWidget extends StatelessWidget {
               height: 240,
               width: 240,
             ),
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
             Container(
@@ -28,7 +28,7 @@ class OnBoardingWidget extends StatelessWidget {
                 children: _pageIndicators(context, index),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             const Text(
@@ -39,7 +39,7 @@ class OnBoardingWidget extends StatelessWidget {
                 fontWeight: FontWeight.bold
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 15,
             ),
             Container(
@@ -67,10 +67,10 @@ class OnBoardingWidget extends StatelessWidget {
         Expanded(
           child: Container(
             height: 10,
-            margin: EdgeInsets.only(right: 5),
+            margin: const EdgeInsets.only(right: 5),
             decoration: BoxDecoration(
               color:
-              i == index ? Color(0xFF0E3C6E) : Color(0xFFDDDDDD),
+              i == index ? const Color(0xFF0E3C6E) : const Color(0xFFDDDDDD),
               shape: BoxShape.circle
               // borderRadius: i == Provider.of<OnBoardingProvider>(context).selectedIndex ? BorderRadius.circular(50) : BorderRadius.circular(25),
             ),
