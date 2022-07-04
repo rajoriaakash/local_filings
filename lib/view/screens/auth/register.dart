@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:local_filings/dimensions.dart';
+import 'package:local_filings/helper/email_checker.dart';
 import 'package:local_filings/view/base/custom_app_bar.dart';
 import 'package:local_filings/view/base/custom_text_field.dart';
 
 class Register extends StatefulWidget {
-
   const Register({Key? key}) : super(key: key);
 
   @override
@@ -16,6 +16,18 @@ class _RegisterState extends State<Register> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmPasswordController = TextEditingController();
+  String _nameErrorMessage = "";
+  String _emailErrorMessage = "";
+  String _passwordErrorMessage = "";
+  String _confirmPasswordErrorMessage = "";
+
+  setErrorMessage(String? errorVariable, String message){
+    setState((){
+      errorVariable = message;
+    });
+    print(errorVariable);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,17 +56,21 @@ class _RegisterState extends State<Register> {
               label: "Full Name",
               inputType: TextInputType.name,
               controller: _nameController,
+              errorText: _nameErrorMessage,
             ),
             CustomTextField(
               label: "E-mail",
               inputType: TextInputType.emailAddress,
               controller: _emailController,
+              errorText: _emailErrorMessage,
+
             ),
             CustomTextField(
               label: "Your password",
               isPassword: true,
               inputType: TextInputType.text,
               controller: _passwordController,
+              errorText: _passwordErrorMessage,
               isShowSuffixIcon: true,
             ),
             CustomTextField(
@@ -62,6 +78,7 @@ class _RegisterState extends State<Register> {
               isPassword: true,
               inputType: TextInputType.text,
               controller: _confirmPasswordController,
+              errorText: _confirmPasswordErrorMessage,
               isShowSuffixIcon: true,
               inputAction: TextInputAction.done,
             ),
@@ -70,12 +87,32 @@ class _RegisterState extends State<Register> {
                 width: Dimensions.getWidth(context, 366),
                 child: ElevatedButton(
                   onPressed: () {
+                    String _name = _nameController.text.trim();
+                    String _email = _emailController.text.trim();
+                    String _password = _passwordController.text.trim();
+                    String _confirmPassword = _confirmPasswordController.text.trim();
+                    if(_name.isEmpty) setErrorMessage(_nameErrorMessage, "Enter name");
+                    if(_email.isEmpty) {
+                      setErrorMessage(_emailErrorMessage, "Enter email");
+                    } else if(EmailChecker.isNotValid(_email)) {
+                      setErrorMessage(_emailErrorMessage, "Please supply a valid email");
+                    }
+                    if(_password.isEmpty) {
+                      setErrorMessage(_passwordErrorMessage, "Enter a password");
+                    } else if(_password.length<6) {
+                      setErrorMessage(_passwordErrorMessage, "Enter a password with more than 6 characters");
+                    }
+                    if(_confirmPassword.isEmpty) {
+                      setErrorMessage(_confirmPasswordErrorMessage, "Please confirm your password");
+                    } else if(_password!=_confirmPassword) {
+                      setErrorMessage(_confirmPasswordErrorMessage, "Passwords fo not match");
+                    }
                   },
                   child: const Text("Login"),
                   style: ButtonStyle(
                     elevation: MaterialStateProperty.all<double>(0),
-                    backgroundColor:
-                        MaterialStateProperty.all<Color>(const Color(0xFFFF832A)),
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                        const Color(0xFFFF832A)),
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                         RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10.0),
@@ -93,7 +130,7 @@ class _RegisterState extends State<Register> {
                   style: TextStyle(color: Color(0xFF7E7E7E), fontSize: 14),
                 ),
                 GestureDetector(
-                  onTap: (){
+                  onTap: () {
                     Navigator.pushReplacementNamed(context, '/login');
                   },
                   child: const Text(

@@ -55,11 +55,11 @@ class _CustomTextFieldState extends State<CustomTextField> {
       });
     }
 
-    return Padding(
+    return Container(
       padding: EdgeInsets.only(
           bottom: Dimensions.getHeight(context, widget.bottomPadding)),
       child: Container(
-        height: Dimensions.getHeight(context, 63),
+        height: widget.errorText.isEmpty? Dimensions.getHeight(context, 63) : Dimensions.getHeight(context, 43),
         width: Dimensions.getWidth(context, 366),
         decoration: const BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -67,58 +67,66 @@ class _CustomTextFieldState extends State<CustomTextField> {
         ),
         padding:
             EdgeInsets.symmetric(horizontal: Dimensions.getWidth(context, 25)),
-        child: Center(
-          child: TextField(
-            maxLines: widget.maxLines,
-            controller: widget.controller,
-            textInputAction: widget.inputAction,
-            keyboardType: widget.inputType,
-            cursorColor: Theme.of(context).primaryColor,
-            enabled: widget.isEnabled,
-            obscureText: widget.isPassword ? _obscureText : false,
-            inputFormatters: widget.inputType == TextInputType.phone
-                ? <TextInputFormatter>[
-                    FilteringTextInputFormatter.allow(RegExp('[0-9+]'))
-                  ]
-                : null,
-            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-            decoration: InputDecoration(
-              label: Text(
-                widget.label,
-                style:
-                    const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-              ),
-              isDense: true,
-              hintText: widget.hintText,
-              border: InputBorder.none,
-              errorText: widget.errorText,
-              errorStyle: TextStyle(
-                fontSize: 10,
-                color: Colors.red
-              ),
-              suffixIcon: widget.isShowSuffixIcon
-                  ? widget.isPassword
-                      ? IconButton(
-                          icon: Icon(
-                            _obscureText
-                                ? Icons.visibility_off
-                                : Icons.visibility,
-                            color: _obscureText
-                                ? Color(0xFF0C55EC)
-                                : Color(0xFFBCBEBC),
-                          ),
-                          onPressed: _toggle)
-                      : widget.isIcon
+        child: Column(
+          children: [
+            Center(
+              child: TextFormField(
+                maxLines: widget.maxLines,
+                controller: widget.controller,
+                textInputAction: widget.inputAction,
+                keyboardType: widget.inputType,
+                cursorColor: Theme.of(context).primaryColor,
+                enabled: widget.isEnabled,
+                obscureText: widget.isPassword ? _obscureText : false,
+                inputFormatters: widget.inputType == TextInputType.phone
+                    ? <TextInputFormatter>[
+                        FilteringTextInputFormatter.allow(RegExp('[0-9+]'))
+                      ]
+                    : null,
+                style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                decoration: InputDecoration(
+                  label: Text(
+                    widget.label,
+                    style:
+                        const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                  ),
+                  isDense: true,
+                  hintText: widget.hintText,
+                  border: InputBorder.none,
+                  errorText: widget.errorText.isEmpty? null : widget.errorText,
+                  errorStyle: TextStyle(fontSize: 10, color: Colors.red),
+                  suffixIcon: widget.isShowSuffixIcon
+                      ? widget.isPassword
                           ? IconButton(
-                              onPressed: widget.onSuffixTap,
                               icon: Icon(
-                                widget.suffixIconUrl,
-                              ))
-                          : null
-                  : null,
+                                _obscureText
+                                    ? Icons.visibility_off_rounded
+                                    : Icons.visibility_rounded,
+                                color: _obscureText
+                                    ? Color(0xFFBCBEBC)
+                                    : Color(0xFF0C55EC),
+                              ),
+                              onPressed: _toggle)
+                          : widget.isIcon
+                              ? IconButton(
+                                  onPressed: widget.onSuffixTap,
+                                  icon: Icon(
+                                    widget.suffixIconUrl,
+                                  ))
+                              : null
+                      : null,
+                ),
+                // onChanged: widget.onChanged,
+              ),
             ),
-            // onChanged: widget.onChanged,
-          ),
+            // Text(
+            //   widget.errorText,
+            //   style: TextStyle(
+            //     color: Colors.red,
+            //     fontSize: 10
+            //   ),
+            // )
+          ],
         ),
       ),
     );

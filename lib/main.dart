@@ -10,10 +10,12 @@ import 'package:local_filings/view/screens/splash/splash.dart';
 import 'package:provider/provider.dart';
 
 import 'provider/onboarding_provider.dart';
+
 void main() {
-  runApp(MultiProvider(providers: [
-    ChangeNotifierProvider.value(value: OnBoardingProvider()),
-  ],
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider.value(value: OnBoardingProvider()),
+    ],
     child: const MyApp(),
   ));
 }
@@ -31,14 +33,13 @@ class MyApp extends StatelessWidget {
         // When navigating to the "/" route, build the FirstScreen widget.
         '/': (context) => const Splash(),
         // When navigating to the "/second" route, build the SecondScreen widget.
-        '/onboarding': (context) =>  OnBoarding(),
-        '/home': (context) =>  Home(),
+        '/onboarding': (context) => OnBoarding(),
+        '/home': (context) => Home(),
         '/register': (context) => Register(),
-        '/login': (context) =>  Login(),
-        '/forgot_password' : (context) =>  ForgotPassword(),
-        '/verify_phone' : (context) =>  VerifyPhone(),
-        '/reset_password' : (context) =>  ResetPassword()
-
+        '/login': (context) => Login(),
+        '/forgot_password': (context) => ForgotPassword(),
+        '/verify_phone': (context) => VerifyPhone(),
+        '/reset_password': (context) => ResetPassword()
       },
       theme: ThemeData(
         // This is the theme of your application.
@@ -73,8 +74,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
-
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done

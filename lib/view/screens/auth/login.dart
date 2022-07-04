@@ -12,6 +12,17 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  String _emailErrorMessage = "";
+  String _passwordErrorMessage = "";
+
+  setErrorMessage(String? variable, String message) {
+    setState(() {
+      variable = message;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,47 +49,50 @@ class _LoginState extends State<Login> {
             CustomTextField(
               label: "E-mail",
               inputType: TextInputType.emailAddress,
+              controller: _emailController,
+              errorText: _emailErrorMessage,
               bottomPadding: 30,
             ),
             CustomTextField(
               label: "Your password",
               isPassword: true,
               inputType: TextInputType.text,
+              controller: _passwordController,
+              errorText: _passwordErrorMessage,
+              isShowSuffixIcon: true,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 GestureDetector(
-                  onTap: (){
+                  onTap: () {
                     Navigator.pushNamed(context, '/forgot_password');
                   },
                   child: Text(
                     "Forgot Password?",
-                    style: TextStyle(
-                      color: Color(0xFF4E87FF),
-                      fontSize: 14
-                    ),
+                    style: TextStyle(color: Color(0xFF4E87FF), fontSize: 14),
                   ),
                 )
               ],
             ),
             Padding(
-              padding: EdgeInsets.only(top: Dimensions.getHeight(context, 20),bottom: Dimensions.getHeight(context, 30)),
+              padding: EdgeInsets.only(
+                  top: Dimensions.getHeight(context, 20),
+                  bottom: Dimensions.getHeight(context, 30)),
               child: Container(
                   height: Dimensions.getHeight(context, 60),
                   width: Dimensions.getWidth(context, 366),
                   child: ElevatedButton(
-                    onPressed: () {
-                    },
+                    onPressed: () {},
                     child: const Text("Login"),
                     style: ButtonStyle(
                       elevation: MaterialStateProperty.all<double>(0),
-                      backgroundColor:
-                      MaterialStateProperty.all<Color>(const Color(0xFFFF832A)),
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                          const Color(0xFFFF832A)),
                       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                           RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10.0),
-                          )),
+                        borderRadius: BorderRadius.circular(10.0),
+                      )),
                     ),
                   )),
             ),
@@ -90,7 +104,7 @@ class _LoginState extends State<Login> {
                   style: TextStyle(color: Color(0xFF7E7E7E), fontSize: 14),
                 ),
                 GestureDetector(
-                  onTap: (){
+                  onTap: () {
                     Navigator.pushReplacementNamed(context, '/register');
                   },
                   child: const Text(
@@ -112,13 +126,9 @@ class _LoginState extends State<Login> {
                 width: Dimensions.getWidth(context, 732),
               ),
             )
-
           ],
         ),
-
       ),
-
-
     );
   }
 }
