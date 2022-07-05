@@ -12,20 +12,24 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
+  //controllers for form fields
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPasswordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
+
+  //error message variables
   String _nameErrorMessage = "";
   String _emailErrorMessage = "";
   String _passwordErrorMessage = "";
   String _confirmPasswordErrorMessage = "";
 
-  setErrorMessage(String? errorVariable, String message){
-    setState((){
+  //set error message if a validation check is failed
+  setErrorMessage(String? errorVariable, String message) {
+    setState(() {
       errorVariable = message;
     });
-    print(errorVariable);
   }
 
   @override
@@ -44,6 +48,7 @@ class _RegisterState extends State<Register> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            //Screen title
             const Text(
               "Create Your Account",
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
@@ -52,19 +57,21 @@ class _RegisterState extends State<Register> {
               endIndent: Dimensions.getWidth(context, 105),
               height: Dimensions.getHeight(context, 40),
             ),
+            //Name text field
             CustomTextField(
               label: "Full Name",
               inputType: TextInputType.name,
               controller: _nameController,
               errorText: _nameErrorMessage,
             ),
+            //E-mail text field
             CustomTextField(
               label: "E-mail",
               inputType: TextInputType.emailAddress,
               controller: _emailController,
               errorText: _emailErrorMessage,
-
             ),
+            //Password text field
             CustomTextField(
               label: "Your password",
               isPassword: true,
@@ -73,6 +80,7 @@ class _RegisterState extends State<Register> {
               errorText: _passwordErrorMessage,
               isShowSuffixIcon: true,
             ),
+            //Confirm password text field
             CustomTextField(
               label: "Confirm Password",
               isPassword: true,
@@ -82,33 +90,42 @@ class _RegisterState extends State<Register> {
               isShowSuffixIcon: true,
               inputAction: TextInputAction.done,
             ),
+            //Login button
             Container(
                 height: Dimensions.getHeight(context, 60),
                 width: Dimensions.getWidth(context, 366),
                 child: ElevatedButton(
                   onPressed: () {
+                    //Validate input by simple checks
                     String _name = _nameController.text.trim();
                     String _email = _emailController.text.trim();
                     String _password = _passwordController.text.trim();
-                    String _confirmPassword = _confirmPasswordController.text.trim();
-                    if(_name.isEmpty) setErrorMessage(_nameErrorMessage, "Enter name");
-                    if(_email.isEmpty) {
+                    String _confirmPassword =
+                        _confirmPasswordController.text.trim();
+                    if (_name.isEmpty) {
+                      setErrorMessage(_nameErrorMessage, "Enter name");
+                    }
+                    if (_email.isEmpty) {
                       setErrorMessage(_emailErrorMessage, "Enter email");
-                    } else if(EmailChecker.isNotValid(_email)) {
-                      setErrorMessage(_emailErrorMessage, "Please supply a valid email");
+                    } else if (EmailChecker.isNotValid(_email)) {
+                      setErrorMessage(
+                          _emailErrorMessage, "Please supply a valid email");
                     }
-                    if(_password.isEmpty) {
-                      setErrorMessage(_passwordErrorMessage, "Enter a password");
-                    } else if(_password.length<6) {
-                      setErrorMessage(_passwordErrorMessage, "Enter a password with more than 6 characters");
+                    if (_password.isEmpty) {
+                      setErrorMessage(
+                          _passwordErrorMessage, "Enter a password");
+                    } else if (_password.length < 6) {
+                      setErrorMessage(_passwordErrorMessage,
+                          "Enter a password with more than 6 characters");
                     }
-                    if(_confirmPassword.isEmpty) {
-                      setErrorMessage(_confirmPasswordErrorMessage, "Please confirm your password");
-                    } else if(_password!=_confirmPassword) {
-                      setErrorMessage(_confirmPasswordErrorMessage, "Passwords fo not match");
+                    if (_confirmPassword.isEmpty) {
+                      setErrorMessage(_confirmPasswordErrorMessage,
+                          "Please confirm your password");
+                    } else if (_password != _confirmPassword) {
+                      setErrorMessage(_confirmPasswordErrorMessage,
+                          "Passwords fo not match");
                     }
                   },
-                  child: const Text("Login"),
                   style: ButtonStyle(
                     elevation: MaterialStateProperty.all<double>(0),
                     backgroundColor: MaterialStateProperty.all<Color>(
@@ -118,10 +135,12 @@ class _RegisterState extends State<Register> {
                       borderRadius: BorderRadius.circular(10.0),
                     )),
                   ),
+                  child: const Text("Login"),
                 )),
             SizedBox(
               height: Dimensions.getHeight(context, 20),
             ),
+            //Go to login screen link and text
             Row(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
@@ -143,6 +162,7 @@ class _RegisterState extends State<Register> {
                 ),
               ],
             ),
+            //Google SIgnIn button
             GestureDetector(
               onTap: () {},
               child: Image.asset(

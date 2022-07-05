@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:local_filings/view/screens/onboarding/onboarding.dart';
+import 'package:local_filings/dimensions.dart';
 
 class Splash extends StatefulWidget {
   const Splash({Key? key}) : super(key: key);
@@ -11,19 +11,19 @@ class Splash extends StatefulWidget {
 }
 
 class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
-  // double _logoHeight = 188;
-  // double _logoWidth = 268;
+  //opacity value initially
   double _splashOpacity = 1;
 
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 0)).then((value) =>  setState((){
-      // _logoHeight = _logoHeight*20;
-      // _logoWidth = _logoWidth*20;
-      _splashOpacity = 0;
-    }));
-    Future.delayed(const Duration(milliseconds: 4800)).then((value) =>  Navigator.pushReplacementNamed(context, '/onboarding'));
+    // set final opacity value
+    Future.delayed(const Duration(seconds: 0)).then((value) => setState(() {
+          _splashOpacity = 0;
+        }));
+    //navigate to next screen
+    Future.delayed(const Duration(milliseconds: 4800)).then(
+        (value) => Navigator.pushReplacementNamed(context, '/onboarding'));
   }
 
   @override
@@ -33,25 +33,27 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          //Local Filings logo
           AnimatedOpacity(
             opacity: _splashOpacity,
             duration: const Duration(milliseconds: 4000),
             curve: Curves.easeInQuint,
             child: Image.asset(
-                'assets/images/logo.png',
+              'assets/images/logo.png',
             ),
           ),
-          const SizedBox(
-            height: 20,
+          SizedBox(
+            height:  Dimensions.getHeight(context, 30),
           ),
+          //Local Filings
           AnimatedOpacity(
             opacity: _splashOpacity,
             duration: const Duration(milliseconds: 4000),
             curve: Curves.easeInQuint,
             child: Container(
-              width: 274,
+              width: Dimensions.getWidth(context, 274),
               child: Image.asset(
-                  'assets/images/localfilings.png',
+                'assets/images/localfilings.png',
               ),
             ),
           )

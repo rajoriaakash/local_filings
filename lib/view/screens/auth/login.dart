@@ -12,14 +12,18 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  //controllers for form fields
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+
+  //error message variables
   String _emailErrorMessage = "";
   String _passwordErrorMessage = "";
 
-  setErrorMessage(String? variable, String message) {
+  //set error message if a validation check is failed
+  setErrorMessage(String? errorVariable, String message) {
     setState(() {
-      variable = message;
+      errorVariable = message;
     });
   }
 
@@ -27,6 +31,7 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
+      //App Bar
       appBar: CustomAppBar(
         isBackButtonExist: false,
         isNotificationButtonExist: false,
@@ -38,6 +43,7 @@ class _LoginState extends State<Login> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            //Screen title
             const Text(
               "Welcome Back",
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
@@ -46,6 +52,7 @@ class _LoginState extends State<Login> {
               endIndent: Dimensions.getWidth(context, 105),
               height: Dimensions.getHeight(context, 80),
             ),
+            //Email Text field
             CustomTextField(
               label: "E-mail",
               inputType: TextInputType.emailAddress,
@@ -53,6 +60,7 @@ class _LoginState extends State<Login> {
               errorText: _emailErrorMessage,
               bottomPadding: 30,
             ),
+            //Password Text Field
             CustomTextField(
               label: "Your password",
               isPassword: true,
@@ -61,6 +69,7 @@ class _LoginState extends State<Login> {
               errorText: _passwordErrorMessage,
               isShowSuffixIcon: true,
             ),
+            //Forgot Password link
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
@@ -68,13 +77,14 @@ class _LoginState extends State<Login> {
                   onTap: () {
                     Navigator.pushNamed(context, '/forgot_password');
                   },
-                  child: Text(
+                  child: const Text(
                     "Forgot Password?",
                     style: TextStyle(color: Color(0xFF4E87FF), fontSize: 14),
                   ),
                 )
               ],
             ),
+            //Login Button
             Padding(
               padding: EdgeInsets.only(
                   top: Dimensions.getHeight(context, 20),
@@ -84,7 +94,6 @@ class _LoginState extends State<Login> {
                   width: Dimensions.getWidth(context, 366),
                   child: ElevatedButton(
                     onPressed: () {},
-                    child: const Text("Login"),
                     style: ButtonStyle(
                       elevation: MaterialStateProperty.all<double>(0),
                       backgroundColor: MaterialStateProperty.all<Color>(
@@ -94,8 +103,10 @@ class _LoginState extends State<Login> {
                         borderRadius: BorderRadius.circular(10.0),
                       )),
                     ),
+                    child: const Text("Login"),
                   )),
             ),
+            //Go to Registration screen link
             Row(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
@@ -110,14 +121,15 @@ class _LoginState extends State<Login> {
                   child: const Text(
                     "Create an account",
                     style: TextStyle(
-                        color: const Color(0xFF0C55EE),
+                        color: Color(0xFF0C55EE),
                         fontSize: 16,
                         fontWeight: FontWeight.w400),
                   ),
                 ),
               ],
             ),
-            Spacer(),
+            const Spacer(),
+            //Google Sign In button
             GestureDetector(
               onTap: () {},
               child: Image.asset(

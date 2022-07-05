@@ -13,6 +13,7 @@ import 'provider/onboarding_provider.dart';
 
 void main() {
   runApp(MultiProvider(
+    //add providers here to access values all over the app
     providers: [
       ChangeNotifierProvider.value(value: OnBoardingProvider()),
     ],
@@ -30,9 +31,8 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       initialRoute: '/',
       routes: {
-        // When navigating to the "/" route, build the FirstScreen widget.
+        //Named routes to manage Navigation through Screens
         '/': (context) => const Splash(),
-        // When navigating to the "/second" route, build the SecondScreen widget.
         '/onboarding': (context) => OnBoarding(),
         '/home': (context) => Home(),
         '/register': (context) => Register(),
