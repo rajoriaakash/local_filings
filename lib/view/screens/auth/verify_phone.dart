@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:otp_text_field/otp_text_field.dart';
 import 'package:otp_text_field/style.dart';
@@ -15,6 +16,7 @@ class VerifyPhone extends StatefulWidget {
 class _VerifyPhoneState extends State<VerifyPhone> {
   //controllers for form fields
   final OtpFieldController _otpController = OtpFieldController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,10 +49,20 @@ class _VerifyPhoneState extends State<VerifyPhone> {
               width: Dimensions.getWidth(context, 366),
               padding: EdgeInsets.symmetric(
                   vertical: Dimensions.getHeight(context, 10)),
-              child: const Text(
-                "Please enter the verification code sent to \n+81 283-849-9394",
-                style: TextStyle(
-                    color: Color(0xFF888888), fontSize: 18, height: 1.4),
+              child: RichText(
+                text: const TextSpan(
+                  style: TextStyle(
+                      color: Color(0xFF888888), fontSize: 18, height: 1.4),
+                  children: <TextSpan>[
+                    TextSpan(
+                        text: 'Please enter the verification code sent to \n'),
+                    TextSpan(
+                        text: '+81 283-849-9394',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xFF000000))),
+                  ],
+                ),
               ),
             ),
             // SizedBox(
@@ -65,16 +77,18 @@ class _VerifyPhoneState extends State<VerifyPhone> {
                 length: 4,
                 width: MediaQuery.of(context).size.width,
                 fieldWidth: Dimensions.getWidth(context, 70),
-                style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+                style: const TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
                 controller: _otpController,
                 otpFieldStyle: OtpFieldStyle(
-                    backgroundColor: Color(0xFFF2F2F2),
-                    borderColor: Color(0xFFBCBEBC),
-                    focusBorderColor: Color(0xFFFF832A)),
+                    backgroundColor: const Color(0xFFF2F2F2),
+                    borderColor: const Color(0xFFBCBEBC),
+                    focusBorderColor: const Color(0xFFFF832A)),
                 textFieldAlignment: MainAxisAlignment.spaceBetween,
                 fieldStyle: FieldStyle.box,
                 onCompleted: (pin) {
-                  print("Completed: " + pin);
+                  if (kDebugMode) {
+                    print("Completed pin: $pin");
+                  }
                 },
               ),
             ),
