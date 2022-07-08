@@ -51,7 +51,11 @@ class MyApp extends StatelessWidget {
         // or simply save your changes to "hot reload" in a Flutter IDE).
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
-        primarySwatch: Colors.blue,
+        colorScheme: ColorScheme.fromSwatch().copyWith(
+          primary: const Color(0xFFFF832A),
+          secondary: const Color(0xFFFFFFFF),
+          tertiary: const Color(0xFF595959),
+        ),
       ),
     );
   }

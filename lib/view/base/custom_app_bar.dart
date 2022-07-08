@@ -5,12 +5,14 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final bool isBackButtonExist;
   final bool isNotificationButtonExist;
+  final bool centredTitle;
 
   CustomAppBar({
     Key? key,
     this.title = "",
     this.isBackButtonExist = true,
     this.isNotificationButtonExist = true,
+    this.centredTitle = false,
   });
 
   @override
@@ -26,10 +28,13 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       //Title of app bar
       title: Padding(
         padding: EdgeInsets.only(top: 35),
-        child: Text(
-          title,
-          style: const TextStyle(
-            fontSize: 18,
+        child: Align(
+          alignment: centredTitle? Alignment.center : Alignment.bottomLeft,
+          child: Text(
+            title,
+            style: const TextStyle(
+              fontSize: 18,
+            ),
           ),
         ),
       ),

@@ -21,9 +21,11 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
     Future.delayed(const Duration(seconds: 0)).then((value) => setState(() {
           _splashOpacity = 0;
         }));
-    //navigate to next screen
+    // //navigate to next screen
+    // Future.delayed(const Duration(milliseconds: 4800)).then(
+    //     (value) => Navigator.pushReplacementNamed(context, '/onboarding'));
     Future.delayed(const Duration(milliseconds: 4800)).then(
-        (value) => Navigator.pushReplacementNamed(context, '/onboarding'));
+            (value) => Navigator.pushReplacementNamed(context, '/home'));
   }
 
   @override
