@@ -1,4 +1,4 @@
-class SharedLists {
+class SharedConstants {
   static List<Map> allServices = [
     {
       "index": 1,
@@ -61,4 +61,22 @@ class SharedLists {
       "logoUrl": "assets/images/all_services_logo/Shop_Establishments.png"
     },
   ];
+
+  static List<Map> popularServices = [
+    {
+      "index": 1,
+      "name": "GST Registration",
+      "routeName": "/",
+      "serviceIllustrationURL": "assets/images/GST_Registration_Card.png",
+    },
+    // {
+    //   "index" : 2,
+    //   "name" : "LLP Registration",
+    //   "serviceIllustrationURL" : "assets/images/LLP_Registration_Card.png",
+    // }
+  ];
+
+  static Map bottomBarIndex = {
+    "home": 0,
+  };
 }
