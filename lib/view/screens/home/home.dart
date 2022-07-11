@@ -147,12 +147,13 @@ class _HomeState extends State<Home> {
                       ],
                     );
                   }),
+              SizedBox(height:Dimensions.getHeight(context, 20)),
               const Text(
                 "Popular Services",
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
               ),
               //Popular Services List
-              SizedBox(
+              Container(
                 height: Dimensions.getHeight(context, 186),
                 child: ListView.builder(
                     shrinkWrap: true,

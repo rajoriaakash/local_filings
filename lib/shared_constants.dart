@@ -67,13 +67,27 @@ class SharedConstants {
       "index": 1,
       "name": "GST Registration",
       "routeName": "/",
-      "serviceIllustrationURL": "assets/images/GST_Registration_Card.png",
+      "serviceIllustrationURL":
+          "assets/images/popular_services_cards/GST_Registration_Card.png",
     },
-    // {
-    //   "index" : 2,
-    //   "name" : "LLP Registration",
-    //   "serviceIllustrationURL" : "assets/images/LLP_Registration_Card.png",
-    // }
+    {
+      "index": 2,
+      "name": "LLP Registration",
+      "serviceIllustrationURL":
+          "assets/images/popular_services_cards/LLP_Registration_Card.png",
+    },
+    {
+      "index": 3,
+      "name": "TradeMark Registration",
+      "serviceIllustrationURL":
+          "assets/images/popular_services_cards/TM_Registration_Card.png",
+    },
+    {
+      "index": 4,
+      "name": "MSME Registration",
+      "serviceIllustrationURL":
+          "assets/images/popular_services_cards/MSME_Registration_Card.png",
+    }
   ];
 
   static Map bottomBarIndex = {
